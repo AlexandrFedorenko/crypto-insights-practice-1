@@ -6,11 +6,9 @@ import { ThemeProvider } from 'next-themes';
 import { useState } from 'react';
 
 export function Providers({ children }: { children: React.ReactNode }) {
-    // Создаем queryClient один раз при инициализации
     const [queryClient] = useState(() => new QueryClient({
         defaultOptions: {
             queries: {
-                // Данные считаются "несвежими" через 1 минуту (оптимизация)
                 staleTime: 60 * 1000,
             },
         },
@@ -21,7 +19,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                 {children}
             </ThemeProvider>
-            {/* Инструменты разработчика для React Query (видны только в dev режиме) */}
+            
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     );
